@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Косметика та Парфюми</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .nav {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav a {
+            text-decoration: none;
+            color: #333;
+        }
+        .search-container {
+            position: relative;
+        }
+        .search-bar {
+            padding: 0.5rem;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+        }
+        .suggestions {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .suggestions.active {
+            display: block;
+        }
+        .suggestions div {
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+        .suggestions div:hover {
+            background: #f4f4f9;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Косметика та Парфюми</div>
+        <nav class="nav">
+            <a href="#">Головна</a>
+            <a href="#">Косметика</a>
+            <a href="#">Парфюми</a>
+            <a href="#">Контакти</a>
+        </nav>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Пошук товарів..." oninput="showSuggestions()">
+            <div class="suggestions" id="suggestions-box"></div>
+        </div>
+    </header>
+    <main>
+        <div class="product-list" id="product-list">
+            <div class="product-card" data-name="Парфуми Chanel">Парфуми Chanel</div>
+            <div class="product-card" data-name="Крем для обличчя">Крем для обличчя</div>
+            <div class="product-card" data-name="Помада Dior">Помада Dior</div>
+            <div class="product-card" data-name="Туш для вій">Туш для вій</div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 Косметика та Парфюми. Всі права захищені.</p>
+    </footer>
+    <script>
+        const products = [
+            'Парфуми Chanel',
+            'Крем для обличчя',
+            'Помада Dior',
+            'Туш для вій'
+        ];
+        function showSuggestions() {
+            const input = document.querySelector('.search-bar').value.toLowerCase();
+            const suggestionsBox = document.getElementById('suggestions-box');
+            suggestionsBox.innerHTML = '';
+            if (input) {
+                const filteredProducts = products.filter(product => product.toLowerCase().includes(input));
+                filteredProducts.forEach(product => {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.textContent = product;
+                    suggestionItem.onclick = () => alert('Перехід на сторінку: ' + product);
+                    suggestionsBox.appendChild(suggestionItem);
+                });
+                suggestionsBox.classList.add('active');
+            } else {
+                suggestionsBox.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
